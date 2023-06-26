@@ -34,3 +34,4 @@ def added_new_function():
     print("something")
     print("something")
     print("something")
+    print("something")
