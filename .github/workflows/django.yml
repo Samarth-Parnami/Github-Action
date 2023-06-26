@@ -8,7 +8,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       max-parallel: 4
       matrix:
@@ -16,6 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Coverage report For Changed Files
+      run: |
+        git fetch origin ${{ github.base_ref }}
+        git diff --name-only ${{ github.base_ref }} -- web/beaconstac
+        files='' 
+        for modified_added in $(git diff --name-only ${{ github.base_ref }} -- web/beaconstac); do
+            files="$files $modified_added"
+        done
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
