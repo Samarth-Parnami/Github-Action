@@ -16,11 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: ${{ github.event.pull_request.commits }} + 1
     - name: Coverage report For Changed Files
       run: |
-        git fetch origin
-        git branch
-        git fetch origin ${{ github.base_ref }}
         git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs
         files='' 
         for modified_added in $(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs); do
