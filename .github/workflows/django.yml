@@ -21,11 +21,16 @@ jobs:
         fetch-depth: ${{ github.event.pull_request.commits }} + 1
     - name: Coverage report For Changed Files
       run: |
-        files='' 
-        for modified_added in $(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}| grep -i "^web/beaconstac" | xargs); do
+        changed=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}| grep -i "^web/beaconstac" | xargs)
+        if (changed != '')
+        then
+        files=''
+        for modified_added in ; do
             files="$files $modified_added"
         done
         echo $files
+        coverage report ${files}
+        fi
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
