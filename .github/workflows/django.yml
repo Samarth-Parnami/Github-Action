@@ -23,7 +23,7 @@ jobs:
         git fetch origin ${{ github.base_ref }}
         git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs
         files='' 
-        for modified_added in $(git diff --name-only ${{ github.base_ref }} -- web/beaconstac); do
+        for modified_added in $(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | xargs); do
             files="$files $modified_added"
         done
     - name: Set up Python ${{ matrix.python-version }}
