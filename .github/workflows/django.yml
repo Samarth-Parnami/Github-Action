@@ -25,13 +25,12 @@ jobs:
         echo ${{github.event.pull_request.base.ref}}
         echo ${{github.event.pull_request.base.sha}}
         git fetch origin ${{github.event.pull_request.base.sha}}
-        changed=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}| grep -i "^web/beaconstac" | xargs)
-        if (changed != '')
-        then
-        files=''
-        for modified_added in ; do
-            files="$files $modified_added"
-        done
+        changed="$(git diff --name-only --diff-filter=ACMRT ${{github.event.pull_request.base.sha}} ${{ github.event.pull_request.head.sha}} | grep -i "^web/beaconstac" | xargs)"
+          if [ -n "$changed" ];then
+          files=""
+          for modified_added in $changed; do
+              files="$files $modified_added"
+          done
         echo $files
         coverage report ${files}
         fi
