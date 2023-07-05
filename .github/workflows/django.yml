@@ -12,22 +12,17 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.9]
+        python-version: [3.7]
 
     steps:
     - uses: actions/checkout@v3
       with:
         ref: ${{ github.head_ref }}
-        fetch-depth: ${{ github.event.pull_request.commits }}
     - name: Coverage report For Changed Files
       run: |
-        git log --oneline
-        echo ${{github.event.pull_request.base.ref}}
-        echo ${{github.event.pull_request.base.sha}}
-        git fetch origin ${{github.event.pull_request.base.sha}}
-        git branch
-        changed="$(git diff --name-only --diff-filter=ACMRT ${{github.event.pull_request.base.sha}} ${{ github.event.pull_request.head.sha}} | grep -i "^web/beaconstac" | xargs)"
-        echo $chan
+        git show ${{github.event.after}}
+        changed="$(git show ${{ github.event.after}})"
+        echo $changed
           if [ -n "$changed" ];then
           files=""
           for modified_added in $changed; do
