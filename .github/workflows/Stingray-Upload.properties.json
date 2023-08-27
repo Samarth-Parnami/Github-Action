@@ -1,0 +1,5 @@
+{
+    "name": "Stringray Upload Action",
+    "description": "Uploads coverage file to a remote Storage Server",
+    "iconName": "stingray.svg"
+}

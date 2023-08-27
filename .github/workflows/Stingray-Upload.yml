@@ -1,0 +1,12 @@
+name: Stringray Upload Action
+on:
+  workflow_dispatch:
+jobs:
+  Upload:
+    runs-on: self-hosted
+    
+    steps:
+    - name: Uploading File to Remote Server
+      run: |
+            echo 'Stingray is Live'
+      
