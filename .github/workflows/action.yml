@@ -1,7 +1,7 @@
 name: Stringray Upload Action
 description: Uploads coverage file to Remote Server
 runs:
-  using: "composite"
+  using: 'composite'
     steps:
     - name: Uploading File to Remote Server
       run: |
