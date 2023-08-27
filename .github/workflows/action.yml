@@ -1,10 +1,7 @@
 name: Stringray Upload Action
-on:
-  workflow_dispatch:
-jobs:
-  Upload:
-    runs-on: self-hosted
-    
+description: Uploads coverage file to Remote Server
+runs:
+  using: 'composite'
     steps:
     - name: Uploading File to Remote Server
       run: |
