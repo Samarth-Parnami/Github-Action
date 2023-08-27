@@ -14,6 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Upload coverage reports to Codecov
-      uses: ./.github/workflows/Stingray-Upload
+      uses: ./.github/workflows/action.yml
 
 
