@@ -35,7 +35,4 @@ wait
 # cd ..
 # gulp next
 
-ls -R webroot
-
-
 wait
