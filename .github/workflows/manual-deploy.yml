@@ -1,0 +1,17 @@
+name: (QA) Manual deploy
+on: [workflow_dispatch]
+jobs:
+  deployqa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16'
+      - name: Test it
+        run: |
+          ./staging-deploy.sh
+      - name: Invalidate caches
