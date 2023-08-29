@@ -16,15 +16,15 @@ gulp compress-new-images &
 task2_pid=$!
 gulp compress-new-images-png &
 task3_pid=$!
-gulp generate-webroot &
-task4_pid=$!
-gulp minify &
-task5_pid=$!
+# gulp generate-webroot &
+# task4_pid=$!
+# gulp minify &
+# task5_pid=$!
 wait $task1_pid
 wait $task2_pid
 wait $task3_pid
-wait $task4_pid
-wait $task5_pid
+# wait $task4_pid
+# wait $task5_pid
 echo "All tasks completed successfully."
 wait
 
