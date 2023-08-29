@@ -1,5 +1,5 @@
 name: (QA) Manual deploy
-on: [workflow_dispatch]
+on: push
 jobs:
   deployqa:
     runs-on: self-hosted
