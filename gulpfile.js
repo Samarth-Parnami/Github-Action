@@ -117,9 +117,12 @@ function getGitChangedImages() {
 }
 function getGitChangedImagesPNG() {
 
-    const modifiedOutput = execSync('git diff --name-only --diff-filter=A HEAD^').toString();  
     const untrackedOutput = execSync('git ls-files --others --exclude-standard').toString();
-    const output = modifiedOutput + untrackedOutput.split('\n').map(line => 'A\t' + line).join('\n');
+    const currentBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+    const diffOutput = execSync(`git diff ${currentBranch}..develop --diff-filter=A --name-only`).toString();
+    console.log(diffOutput);
+    console.log(diffOutput.split('\n'));
+    const output = untrackedOutput + diffOutput.split('\n').map(line => 'A\t' + line).join('\n');
 
     return output.split('\n')
     .map(line => line.trim())
