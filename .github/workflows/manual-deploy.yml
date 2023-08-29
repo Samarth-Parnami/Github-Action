@@ -11,6 +11,8 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '16'
+      - name: Fetch develop
+        run: git fetch origin develop:develop
       - name: Test it
         run: |
           ./staging-deploy.sh
