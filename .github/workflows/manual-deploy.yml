@@ -14,4 +14,3 @@ jobs:
       - name: Test it
         run: |
           ./staging-deploy.sh
-      - name: Invalidate caches
