@@ -109,7 +109,7 @@ function getGitChangedImages() {
     const diffOutput = execSync(`git diff ${currentBranch}..develop --diff-filter=A --name-only`).toString();
     console.log(diffOutput);
     console.log(diffOutput.split('\n'));
-    const output = modifiedOutput + diffOutput.split('\n').map(line => 'A\t' + line).join('\n');
+    const output = untrackedOutput + diffOutput.split('\n').map(line => 'A\t' + line).join('\n');
 
     return output.split('\n')
     .map(line => line.trim())
