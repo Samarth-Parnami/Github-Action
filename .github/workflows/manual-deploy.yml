@@ -2,7 +2,7 @@ name: (QA) Manual deploy
 on: [workflow_dispatch]
 jobs:
   deployqa:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v2
