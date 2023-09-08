@@ -1,0 +1,44 @@
+name: Linting
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - id: files
+        uses: tj-actions/changed-files@v35.9.2
+        with:
+            files: |
+                **/*.php
+                **/*.html
+
+      - name: Install Dependencies
+        run: |
+          npm install --global \
+          npm install stylelint-config-html
+          postcss@^8.4.21 \
+          stylelint@^15.1.0 \
+          stylelint-config-standard@^30.0.1 \
+
+      - name: Run Stylelint linter
+        run: |
+            CHANGED_FILES="${{steps.files.outputs.all_changed_files}}"
+            if [[ ! -z $CHANGED_FILES ]]; then
+
+            echo "StyleLint version: "$(npx stylelint --version)
+            echo "The files will be checked: "$(echo $CHANGED_FILES)
+            npx stylelint $CHANGED_FILES
+            else
+                echo "No files with the \"css|scss\" extension found"
+            fi
