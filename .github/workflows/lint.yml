@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
@@ -22,14 +20,16 @@ jobs:
         uses: tj-actions/changed-files@v35.9.2
         with:
             files: |
-                **/*.css
+                **/*.php
                 **/*.html
 
       - name: Install Dependencies
         run: |
-          npm install postcss-html
-          npm install stylelint-config-standard 
+          npm install --global \
           npm install stylelint-config-html
+          postcss@^8.4.21 \
+          stylelint@^15.1.0 \
+          stylelint-config-standard@^30.0.1 \
 
       - name: Run Stylelint linter
         run: |
