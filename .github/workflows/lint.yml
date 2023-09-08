@@ -25,6 +25,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+        echo "================================================================================"
           npm install --global \
           npm install stylelint-config-html
           postcss@^8.4.21 \
