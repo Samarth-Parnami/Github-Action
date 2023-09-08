@@ -36,9 +36,9 @@ jobs:
             CHANGED_FILES="${{steps.files.outputs.all_changed_files}}"
             if [[ ! -z $CHANGED_FILES ]]; then
 
-            echo "StyleLint version: "$(npx stylelint --version)
+            echo "StyleLint version: t"$(npx stylelint --version)
             echo "The files will be checked: "$(echo $CHANGED_FILES)
             npx stylelint $CHANGED_FILES
             else
-                echo "No files with the \"css|scss\" extension found"
+                echo "No files with the t \"css|scss\" extension found"
             fi
