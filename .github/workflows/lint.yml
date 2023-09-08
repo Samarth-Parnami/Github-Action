@@ -1,0 +1,29 @@
+name: Linting
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: |
+          npm install postcss-html
+          npm install stylelint-config-standard 
+          npm install stylelint-config-html
+
+      - name: Run Stylelint linter
+        run: git diff --name-only --diff-filter=AM ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep -E '^src/.*\.(html|php|scss|css)$' | xargs -I{} npx stylelint stylelint-config-standard stylelint-config-html "{}"
