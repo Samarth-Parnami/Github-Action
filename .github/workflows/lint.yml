@@ -23,7 +23,7 @@ jobs:
                 **/*.php
                 **/*.html
 
-      - name: Install Dependencies
+      - name: Install Dependencies 
         run: |
           npm install --global \
           npm install stylelint-config-html
