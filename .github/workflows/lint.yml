@@ -26,7 +26,6 @@ jobs:
       - name: Install Dependencies 
         run: |
           npm install --save-dev stylelint-config-html
-          npm install --save-dev postcss\
           npm install --save-dev stylelint@^15.1.0 \
           npm install --save-dev stylelint-config-standard@^30.0.1 \
 
