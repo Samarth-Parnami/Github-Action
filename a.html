@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample HTML</title>
+    <style>
+        /* Error: Missing semicolon after the color property */
+        body {
+            background-color: lightblue;
+            color: white;
+        }
+
+        /* Error: Missing curly braces for the media query */
+        @media screen and (max-width: 600px)
+        body {
+            font-size: 14px;
+        }
+
+        /* Correct: Add curly braces for the media query */
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* Error: Missing units for the font-size property */
+        p {
+            font-size: 16;
+        }
+
+        /* Correct: Add units for the font-size property */
+        p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Stylelint Sample</h1>
+    <p>This is a sample HTML file with CSS errors.</p>
+</body>
+</html>

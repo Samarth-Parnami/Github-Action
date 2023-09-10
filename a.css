@@ -1,0 +1,21 @@
+/* Incorrect: Missing a semicolon at the end of the declaration */
+body {
+    background-color: lightblue
+    color: white;
+}
+
+/* Incorrect: Missing curly braces for the media query */
+@media screen and (max-width: 600px)
+body {
+    font-size: 14px;
+}
+
+/* Incorrect: Using an invalid property name */
+p {
+    font-sizes: 16px;
+}
+
+/* Incorrect: Using an unknown CSS property */
+h1 {
+    text-shadow: 2px 2px 4px red;
+}
