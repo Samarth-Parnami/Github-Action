@@ -25,10 +25,10 @@ jobs:
 
       - name: Install Dependencies 
         run: |
-          npm install stylelint-config-html --save-dev
-          npm install postcss\ --save-dev
-          npm install stylelint@^15.1.0 \ --save-dev
-          npm install stylelint-config-standard@^30.0.1 \ --save-dev
+          npm install --save-dev stylelint-config-html
+          npm install --save-dev postcss\
+          npm install --save-dev stylelint@^15.1.0 \
+          npm install --save-dev stylelint-config-standard@^30.0.1 \
 
       - name: Run Stylelint linter
         run: |
