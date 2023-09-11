@@ -1,9 +1,9 @@
-name: Linting
+name: Lint
 
 on:
   pull_request:
     branches:
-      - main 
+      - develop
 
 jobs:
   lint:
@@ -22,22 +22,32 @@ jobs:
             files: |
                 **/*.php
                 **/*.html
+                **/*.nunjucks
+                **/*.njx
                 **/*.css
+                **/*.scss
 
-      - name: Install Dependencies 
+      - name: Install Dependencies
         run: |
-          npm install --save-dev stylelint@^15.1.0 \
-          npm install --save-dev stylelint-config-standard@^30.0.1 \
-          npm install --save-dev postcss-html stylelint-config-html
+            npm install --save-dev stylelint@^15.1.0 
+            npm install --save-dev stylelint-config-standard@^30.0.1 
+            npm install --save-dev postcss-html stylelint-config-html
+            npm install --save-dev djlint
 
       - name: Run Stylelint linter
         run: |
-            CHANGED_FILES="${{steps.files.outputs.all_changed_files}}"
+            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep '\.\(njx\|html\|php\|nunjucks\)$')"
             if [[ ! -z $CHANGED_FILES ]]; then
-
-            echo "StyleLint version: "$(npx stylelint --version)
-            echo "The files will be checked: "$(echo $CHANGED_FILES)
-            npx stylelint $CHANGED_FILES --config .stylelintrc.json
-            else
-                echo "No files with the \"css|scss\" extension found"
+            djlint --lint --configuration .djlintrc.json $CHANGED_FILES
             fi
+
+      - name: Run Stylelint linter
+        run: |
+            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep '\.\(html\|php\|css\|scss\)$')"
+            if [[ ! -z $CHANGED_FILES ]]; then
+            npx stylelint $CHANGED_FILES
+            fi
+      - name: Run Prettier in src-next 
+        run: |
+          cd src-next
+          npx prettier --check .
