@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Stylelint linter
         run: |
-            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep '\.(html|php|css|scss)$' || true)"
+            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep -E '\.(html|php|css|scss)$' || true)"
             echo $CHANGED_FILES
             if [[ ! -z $CHANGED_FILES ]]; then
             npx stylelint $CHANGED_FILES
