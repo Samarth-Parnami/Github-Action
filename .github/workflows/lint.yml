@@ -3,7 +3,7 @@ name: Lint
 on:
   pull_request:
     branches:
-      - main
+      - develop
 
 jobs:
   lint:
@@ -36,14 +36,14 @@ jobs:
 
       - name: Run Stylelint linter
         run: |
-            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} |  grep -E '\.(njx|html|php|nunjucks)$') || true"
+            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}}  | grep -E '\.(njx|html|php|nunjucks)$' || true)"
             if [[ ! -z $CHANGED_FILES ]]; then
             djlint --lint --configuration .djlintrc.json $CHANGED_FILES
             fi
 
       - name: Run Stylelint linter
         run: |
-            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep '\.\(html\|php\|css\|scss\)$') || true"
+            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep '\.(html|php|css|scss)$' || true)"
             if [[ ! -z $CHANGED_FILES ]]; then
             npx stylelint $CHANGED_FILES
             fi
