@@ -4,7 +4,7 @@ on:
     inputs:
       filename:
         description: "Name of the file to be uploaded"
-        default: '.github/workflows/main.yml'
+        default: '.github/workflows/upload.yml'
         required: false
         type: string
 jobs:
