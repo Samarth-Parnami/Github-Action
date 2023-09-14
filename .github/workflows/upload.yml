@@ -9,7 +9,7 @@ on:
         type: string
 jobs:
   Upload:
-    runs-on: self_hosted
+    runs-on: self-hosted
 
     steps:
       - name: Check file's existance
