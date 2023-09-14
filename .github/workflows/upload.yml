@@ -15,6 +15,6 @@ jobs:
       - name: Check file's existance
         run: | 
             echo "Locating file '${{inputs.filename}}'"
-            if [ ! -f ${{input.filename}} ]; then
+            if [ ! -f ${{inputs.filename}} ]; then
             echo "'${{inputs.filename}}' Not found!!"
             fi
