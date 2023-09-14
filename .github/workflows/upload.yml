@@ -1,0 +1,20 @@
+name: Upload Coverage File
+on:
+  workflow_dispatch:
+    inputs:
+      filename:
+        description: "Name of the file to be uploaded"
+        default: '.github/workflows/main.yml'
+        required: false
+        type: string
+jobs:
+  Upload:
+    runs-on: self_hosted
+
+    steps:
+      - name: Check file's existance
+        run: | 
+            echo "Locating file '${{inputs.filename}}'"
+            if [ ! -f ${{inputs.filename}} ]; then
+            echo "'${{inputs.filename}}' Not found!!"
+            fi
