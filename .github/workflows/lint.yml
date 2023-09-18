@@ -33,14 +33,11 @@ jobs:
             npm install --save-dev stylelint-config-standard@^30.0.1 
             npm install --save-dev postcss-html stylelint-config-html
             npm install --save-dev djlint
+            npm install gulp
 
       - name: Run Stylelint linter
         run: |
-            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}}  | grep -E '\.(njx|html|php|nunjucks)$' || true)"
-            echo $CHANGED_FILES
-            if [[ ! -z $CHANGED_FILES ]]; then
-            djlint --lint --configuration .djlintrc.json $CHANGED_FILES
-            fi
+              gulp dist
 
       - name: Run Stylelint linter
         run: |
