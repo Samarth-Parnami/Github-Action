@@ -157,7 +157,7 @@ gulp.task('compress-new-images-png', function(done) {
     .pipe(gulpPngquant({
         quality: '50-80',
     }))
-    .pipe(gulp.dest(file => file.base));
+    .pipe(gulp.dest(file => file.base)); 
 });
 
 //copy statically build nextJs pages
