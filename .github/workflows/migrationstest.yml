@@ -1,8 +1,6 @@
 name: Django Migration Test
 on:
     push:
-        branches:
-            - 'alpha**'
         paths:
             '**migrations/**.py$'
 jobs:
