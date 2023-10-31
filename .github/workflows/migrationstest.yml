@@ -1,8 +1,6 @@
 name: Django Migration Test
 on:
     push:
-        paths:
-            '**migrations/**.py$'
 jobs:
     checkfiles:
         runs-on: self-hosted
