@@ -1,0 +1,13 @@
+name: Django Migration Test
+on:
+    push:
+        paths:
+            '**migrations/**.py$'
+jobs:
+    checkfiles:
+        runs-on: self-hosted
+        steps:
+            - uses: actions/checkout@v2
+            - name: List changed migrations
+              run: |
+               git show --name-only ${{github.sha}}
