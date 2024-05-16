@@ -1,0 +1,52 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - id: files
+        uses: tj-actions/changed-files@v35.9.2
+        with:
+            files: |
+                **/*.php
+                **/*.html
+                **/*.nunjucks
+                **/*.njx
+                **/*.css
+                **/*.scss
+
+      - name: Install Dependencies
+        run: |
+            npm install --save-dev stylelint@^15.1.0 
+            npm install --save-dev stylelint-config-standard@^30.0.1 
+            npm install --save-dev postcss-html stylelint-config-html
+            npm install --save-dev djlint
+            npm install gulp
+
+      - name: Run Stylelint linter
+        run: |
+              gulp dist
+
+      - name: Run Stylelint linter
+        run: |
+            CHANGED_FILES="$(echo ${{steps.files.outputs.all_changed_files}} | grep -E '\.(html|php|css|scss)$' || true)"
+            echo $CHANGED_FILES
+            if [[ ! -z $CHANGED_FILES ]]; then
+            npx stylelint $CHANGED_FILES
+            fi
+      - name: Run Prettier in src-next 
+        run: |
+          cd src-next
+          npx prettier --check .
