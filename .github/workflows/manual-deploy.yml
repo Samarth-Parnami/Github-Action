@@ -1,0 +1,18 @@
+name: (QA) Manual deploy
+on: push
+jobs:
+  deployqa:
+    runs-on: self-hosted
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16'
+      - name: Fetch develop
+        run: git fetch origin develop:develop
+      - name: Test it
+        run: |
+          ./staging-deploy.sh
